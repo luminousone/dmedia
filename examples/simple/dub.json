@@ -1,0 +1,14 @@
+{
+	"name": "simple",
+	"description": "Opens window and displays triangle using opengl",
+	"copyright": "Copyright © 2014, Ronald D. Hunt",
+	"authors": ["Ronald D. Hunt"],
+	"targetType": "executable",
+	"libs-posix": ["xcb-keysyms","X11", "xcb","X11-xcb","Xxf86vm","GL","dl"],
+	"dependencies": {
+		"simple:dmedia":"~master"
+	},
+	"subPackages": [
+		"./../../"
+	]
+}

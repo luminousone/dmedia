@@ -1,0 +1,7 @@
+{
+	"name" : "dmedia",
+	"targetType": "staticLibrary",
+	"description" : "A minimal D bundle.",
+	"dependencies" : {
+	}
+}
