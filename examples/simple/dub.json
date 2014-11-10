@@ -5,8 +5,9 @@
 	"authors": ["Ronald D. Hunt"],
 	"targetType": "executable",
 	"libs-posix": ["xcb-keysyms","X11", "xcb","X11-xcb","Xxf86vm","GL","dl"],
+	"sourcePaths": [ "source", "generated"],
 	"dependencies": {
-		"simple:dmedia":"~master"
+		"simple:dmedia":"*"
 	},
 	"subPackages": [
 		"./../../"

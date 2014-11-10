@@ -20,15 +20,16 @@ import application.state;
 import application.intent;
 
 import window.event;
-import window.videomode;
 import window.drawable;
 import window.context;
 import window.window;
 
+import system.types;
+
 
 class ClearScreen : dml_drawable {
 	override
-	public void Draw() {
+	public final void Draw() {
 		glClearColor(0.2, 0.4, 0.9, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	}
@@ -36,13 +37,13 @@ class ClearScreen : dml_drawable {
 
 class ResizeScreen : dml_drawable {
 	public uint x,y,w,h;
-	this() {
+	public final this() {
 		x = y = 0;
 		w = 1024;
 		h = 768;
 	}
 	override
-	public void Draw() {
+	public final void Draw() {
 		glViewport(x,y,w,h);
 	}
 }
@@ -54,7 +55,7 @@ class Triangle : dml_drawable {
 	GLuint	sp;
 		
 	override
-	public void Draw() {
+	public final void Draw() {
 
 		if( !VertexArrayID ) {
 			
@@ -79,7 +80,7 @@ class Triangle : dml_drawable {
 		glUseProgram(0);
 	}
 	
-	public this() {
+	public final this() {
 		import std.string;
 		import std.file;
 		
@@ -127,14 +128,14 @@ class BasicState : State {
 	ResizeScreen resize;
 	Triangle triangle;
 	
-	public this( Manager manager ) {
+	public final this( Manager manager ) {
 		super(manager,this);
 		
 		loadContext = new dml_context( );
 		drawContext = new dml_context( loadContext );
 	}
 	
-	public ~this( ) {
+	public final ~this( ) {
 		delete drawContext;
 		delete loadContext;
 	}
@@ -143,8 +144,8 @@ class BasicState : State {
 	void onCreate( ) {
 		super.onCreate();
 		
-		hidden_window.Create( new dml_videoMode(   1,  1), "hidden_window",Window_Hide, loadContext );
-		window.Create       ( new dml_videoMode(1024,768), "test"         ,0, drawContext );
+		hidden_window.Create( VideoMode(   1,  1), "hidden_window",Window_Hide, loadContext );
+		window.Create       ( VideoMode(1024,768), "test"         ,0, drawContext );
 		
 		hidden_window._Use( );
 		
@@ -163,37 +164,31 @@ class BasicState : State {
 	}
 	
 	override
-	public final void onCloseEvent( dml_window window ) {
+	public final void onCloseEvent( WindowID window ) {
 	}
 	
 	override
-	public final void onKeyboardEvent( bool pressed, uint key, dml_window window ) {
+	public final void onKeyboardEvent( bool pressed, uint key, WindowID window ) {
 		if( key == 'q' ) {
 			manager.Finish();
 		}
 	}
 	
 	override
-	public final void onResizeEvent( uint x, uint y, uint w, uint h, dml_window window) {
+	public final void onResizeEvent( uint x, uint y, uint w, uint h, WindowID window) {
 		resize.x = x;
 		resize.y = y;
 		resize.w = w;
 		resize.h = h;
-		Use( window );
+		Use( GetWindowByID(window) );
 		Draw( resize );
 	}
 	
 	override
-	public void onExitEvent( ) {
+	public final void onExitEvent( ) {
 		manager.Finish();
 	}
 }
 
-void main()
-{
-	Manager manager = new Manager( new dml_intent!BasicState(INTENT_START) );
-
-	manager.Start();
-}
 
 

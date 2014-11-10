@@ -1,0 +1,9 @@
+{
+	"name": "buildgen",
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2014, luminous",
+	"authors": ["Ronald D. Hunt"],
+	"targetType" : "executable",
+	"dependencies": {
+	}
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<States>
+		<InitialState>basicState</InitialState>
+		<State name="basicState" module="source" />
+	</States>
+</Project> 
