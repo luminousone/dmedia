@@ -1,7 +1,16 @@
 {
 	"name" : "dmedia",
-	"targetType": "staticLibrary",
+	"targetType" : "staticLibrary",
 	"description" : "A minimal D bundle.",
-	"dependencies" : {
-	}
+	"sourcePaths": ["dml_sources"],
+
+	"sourcePaths-linux": ["platforms/linux_x11","platforms/all","dml_sources"],
+	"importPaths-linux": ["platforms/linux_x11","platforms/all","dml_sources"],
+	"libs-linux": ["xcb-keysyms","X11", "xcb","X11-xcb","Xxf86vm","GL","dl"],
+	"dependencies": {
+		"dmedia:buildgen": "*"
+	},
+	"subPackages": [
+		"./buildgen/"
+	]
 }
